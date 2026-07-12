@@ -27,15 +27,26 @@ export async function getDeviceDetection() {
   const headersList = await headers();
   const mobileHint = headersList.get("sec-ch-ua-mobile");
 
+  let detection: DeviceDetection;
+
   if (mobileHint === "?1") {
-    return { device: "mobile", source: "client-hint" } satisfies DeviceDetection;
+    detection = {
+      device: "mobile",
+      source: "client-hint",
+    };
+  } else if (mobileHint === "?0") {
+    detection = {
+      device: "desktop",
+      source: "client-hint",
+    };
+  } else {
+    detection = {
+      device: null,
+      source: "responsive",
+    };
   }
 
-  if (mobileHint === "?0") {
-    return { device: "desktop", source: "client-hint" } satisfies DeviceDetection;
-  }
-
-  return { device: null, source: "responsive" } satisfies DeviceDetection;
+  return detection;
 }
 
 export async function getDeviceClass() {
