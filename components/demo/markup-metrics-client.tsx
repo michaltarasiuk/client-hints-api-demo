@@ -56,7 +56,12 @@ export function MarkupMetricsClient({
     const savingsPercent =
       traditionalSize > 0 ? Math.round((savings / traditionalSize) * 100) : 0;
 
-    setSizes({ traditionalSize, adaptiveSize, savings, savingsPercent });
+    setSizes({
+      traditionalSize,
+      adaptiveSize,
+      savings,
+      savingsPercent,
+    });
   }, [device, source]);
 
   return (
