@@ -1,0 +1,26 @@
+---
+description: Go-style errors-as-values (errore.org). Read before editing TypeScript.
+alwaysApply: true
+---
+
+# errore convention
+
+This codebase uses [errore.org](https://errore.org/) — errors as union values, not thrown exceptions.
+
+**Before editing TypeScript, read:** `.agents/skills/errore/SKILL.md`
+
+## Quick rules
+
+- Return `Error | T` (or `Promise<Error | T>`) for fallible functions — never throw expected failures
+- Check with `if (x instanceof Error) return x` before using the value
+- Async boundaries: `.catch((e) => new DomainError({ cause: e }))` — wrap in tagged errors, always pass `cause`
+- Sync boundaries: `errore.try({ try: () => ..., catch: (e) => new DomainError({ cause: e }) })`
+- No try/catch for control flow; use `import * as errore from "errore"` (namespace import)
+- Explicit discard only: `void fnThatMayError()` — lintcn `no-unhandled-error` flags discarded Error unions
+
+## Lint
+
+```bash
+mise exec -- bun run lint        # eslint + lintcn
+mise exec -- bun run lint:types  # lintcn only (Go rule)
+```

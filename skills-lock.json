@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "ecc7641aea05f85ca3b11e7759d32aaf52fe05946ab4b63739c7bf78a41237a2"
+    },
+    "errore": {
+      "source": "remorses/errore",
+      "sourceType": "github",
+      "skillPath": "skills/errore/SKILL.md",
+      "computedHash": "c8c58707dfee91f71d479431d3ab3d64d63f824c22760444e7ae08b6397fd378"
+    }
+  }
+}

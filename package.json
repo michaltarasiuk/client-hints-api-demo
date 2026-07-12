@@ -4,19 +4,40 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint . && lintcn lint",
+    "lint:types": "lintcn lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@tailwindcss/postcss": "^4.3.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dedent": "^1.7.2",
+    "lucide-react": "^1.24.0",
     "next": "16.2.10",
+    "postcss": "^8.5.17",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
+    "shadcn": "^4.13.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.2",
+    "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
+    "@tailwindcss/node": "^4.3.2",
+    "@tailwindcss/upgrade": "^4.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "errore": "0.14.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "lintcn": "0.10.1",
+    "postcss-load-config": "^6.0.1",
+    "prettier": "^3.9.5",
     "typescript": "^5"
   },
   "ignoreScripts": [
