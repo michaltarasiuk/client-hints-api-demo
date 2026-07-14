@@ -8,6 +8,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { withMinimumDelay } from "@/lib/with-minimum-delay";
+
+const FETCH_MINIMUM_DELAY_MS = 300;
 
 type UaAvailability = "pending" | "ready" | "unavailable";
 
@@ -66,11 +69,21 @@ export function ClientHintsBrowserPanel() {
     setLoading(true);
     setError(null);
 
-    const values = await loadHighEntropyValues();
-    setLoading(false);
-    (values instanceof Error
-      ? () => setError(values.message)
-      : () => setHighEntropy(values))();
+    try {
+      const values = await withMinimumDelay(
+        loadHighEntropyValues(),
+        FETCH_MINIMUM_DELAY_MS,
+      );
+      if (values instanceof Error) {
+        setError(values.message);
+      } else {
+        setHighEntropy(values);
+      }
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setLoading(false);
+    }
   }
 
   return availability === "pending" ? (
