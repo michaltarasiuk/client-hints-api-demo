@@ -1,5 +1,4 @@
 import "server-only";
-
 import { headers } from "next/headers";
 
 import type { DeviceDetection } from "@/lib/client-hints-shared";
